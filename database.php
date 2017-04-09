@@ -1,5 +1,5 @@
 <?php
-    $page_title="Database";
+    $page_title="Databáze";
     $page = "db";
     require_once 'song.php';
     require_once 'template.php';
@@ -120,65 +120,49 @@
     $songs = queryDB();
     $page_title = "Domčíkův Zpěvník";
 ?>
-<!-- <a href="submit.php">
-  <img src="plus.png" alt="Add a new song" style="width:42px;height:42px;border:42;margin:21" align="right">
-</a> -->
 <form class="form-horizontal" action="database.php" method="GET">
     <div class="container">
-        <div class="row justify-content-center no-gutters">
-            <div class="col-sm-6">
-                <input type="text" class="form-control" placeholder="Název/interpret" <?php echo $search_value;?> name="query"/>
+        <div class="search-and-add-song-group">
+            <div class="song-search-group">
+                <input type="text" class="song-search-input" placeholder="Název/Interpret" name="query">
+                <button class="song-search-button light-gray-button" type="submit">Hledat</button>
             </div>
-            <div class="col-sm-6">
-                <button type="submit" class="btn btn-default">Hledat</button>
+            <div class="add-song-button-group">
+                <a href="http://elitanaroda.org/zpevnik/Zpevnik/submit.php">
+                    <button class="light-gray-button">Přidat písničku</button>
+                </a>
             </div>
+        </div>
+        <div class="checkbox checkbox-inline">
+            <input type="checkbox" id="czech" name="czech" value="checked" <?php echo $czech; ?>>
+            <label for="czech"> Čeština </label>
+        </div>
+        <div class="checkbox checkbox-inline">
+            <input type="checkbox" id="english" name="english" value="checked" <?php echo $english; ?>>
+            <label for="english"> Angličtina </label>
+        </div>
+        <div class="checkbox checkbox-inline">
+            <input type="checkbox" id="spanish" name="spanish" value="checked" <?php echo $spanish; ?>>
+            <label for="spanish"> Španělština </label>
+        </div>
+        <div class="checkbox checkbox-inline">
+            <input type="checkbox" id="slovak" name="slovak" value="checked" <?php echo $slovak; ?>>
+            <label for="slovak"> Slovenština </label>
+        </div>
+        <div class="checkbox checkbox-inline">
+            <input type="checkbox" id="other" name="other" value="checked" <?php echo $other; ?>>
+            <label for="other"> Ostatní </label>
         </div>
         <br>
-        <div class="row">
-            <div class="col-sm-1 text-center">
-                <label>Čeština</label>
-            </div>
-            <div class="col-sm-1 text-center">
-                <label>Angličtina</label>
-            </div>
-            <div class="col-sm-1 text-center">
-                <label>Španělština</label>
-            </div>
-            <div class="col-sm-1 text-center">
-                <label>Slovenština</label>
-            </div>
-            <div class="col-sm-1 text-center">
-                <label>Ostatní</label>
-            </div>
-            <div class="col-sm-7"></div>
+        <div style="margin-top: 10px;">
+            <label>Seřadit podle:</label>
+            <select name="sortBy">
+                <?php generateSortBy();?>
+            </select>
+            <select name="ascDesc">
+                <?php generateAscDesc();?>
+            </select>
         </div>
-         <div class="row">
-            <div class="col-sm-1 text-center">
-                <input type="checkbox" id= "czech" name="czech" value="checked" <?php echo $czech; ?>/>
-            </div>
-            <div class="col-sm-1 text-center">
-                <input type="checkbox" name="english" value="checked" <?php echo $english; ?>/>
-            </div>
-            <div class="col-sm-1 text-center">
-                <input type="checkbox" name="spanish" value="checked" <?php echo $spanish; ?>/>
-            </div>
-            <div class="col-sm-1 text-center">
-                <input type="checkbox" name="slovak" value="checked" <?php echo $slovak; ?>/>
-            </div>
-            <div class="col-sm-1 text-center">
-                <input type="checkbox" name="other" value="checked" <?php echo $other; ?>/>
-            </div>
-            <div class="col-sm-7"></div>
-        </div>
-        <br>
-
-        <label>Seřadit podle:</label>
-        <select name="sortBy">
-            <?php generateSortBy();?>
-        </select>
-        <select name="ascDesc">
-            <?php generateAscDesc();?>
-        </select>
     </div>
 </form>
 <?php
@@ -220,7 +204,7 @@
             <?php
         }
     } else {
-        echo "<h1>Pardon, žádný záznam nevyhovuje zadání. :(</h1>";
+        echo "<div class='container'><h1>S lítostí vám musím oznámit, že žádný záznam nevyhovuje zadání. :(</h1></div>";
     }
     echo '
 </table>

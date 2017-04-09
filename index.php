@@ -7,8 +7,14 @@ require_once 'template.php';
   
 <p>
 Vážení a milí, <br>
-tímto s vámi sdílím svůj zpěvník, jehož vytvářením jsem strávil již nižší stovky hodin. <br>
-Pokud byste čímkoliv chtěli přispět ke kvalitě tohoto zpěvníku, či pokud jste objevili chybu, neváhejte se na mě obrátit na mailu domho108+zpevnik@gmail.com - budu vám vděčný! :)
+tímto s vámi sdílím svůj zpěvník, jehož vytvářením jsem strávil již pár stovek hodin. <br>
+Pokud byste čímkoliv chtěli přispět ke kvalitě tohoto zpěvníku či pokud jste objevili chybu, neváhejte se na mě obrátit na mailu domho108+zpevnik@gmail.com - budu vám vděčný! :)
+</p>
+<p>
+Tato webová stránka slouží taktéž jako součást maturitního projektu z IVT na GNA, 2016/2017.
+</p>
+<p>
+    Dominik
 </p>
 </div>
 <div class="container">

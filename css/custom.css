@@ -11,6 +11,11 @@ body {
   border-radius:0px
 }
 
+.col-centered{
+    float: none;
+    margin: 0 auto;
+}
+
 .navbar-default .navbar-nav>li>a {
   color: white;
 }
@@ -58,4 +63,150 @@ body {
 .btn-xs{
   background-color: #03A9F4;
   border-color: #03A9F4;
+}
+
+.light-gray-button {
+    padding: 5px 15px;
+    border: 2px solid transparent;
+    border-radius: 3px;
+    text-align: center;
+    cursor: pointer;
+    user-select: none;
+    white-space: nowrap;
+    color: #fff;
+    background-color: Silver;
+}
+
+.light-gray-button:hover {
+    color: #fff;
+    background-color: LightGray;
+}
+
+/*
+    Group with
+        - search song group
+        - add song button
+*/
+
+.search-and-add-song-group {
+    display: flex;
+    flex-direction: row;
+}
+
+/* Search song group */
+
+.song-search-group {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    font-size: 15px;
+    line-height: 1.5;
+}
+
+.song-search-input {
+    display: block;
+    flex: 1 1 auto;
+    padding: 5px 15px;
+    border: 2px solid #dce4ec;
+    border-radius: 3px;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    border-right: 0;
+    color: #2c3e50;
+    background-color: #ffffff;
+    transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+}
+
+.song-search-input::placeholder {
+    color: #ced6df;
+}
+
+.song-search-input:focus {
+    border-color: #c3cad3;
+    outline: 0;
+}
+
+.song-search-button {
+    flex: 0 0 auto;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+/* Add song group */
+
+.add-song-button-group {
+    flex: 0 0 auto;
+    margin-left: 5px;
+}
+
+/* Styles for phones */
+
+@media (max-width: 500px) {
+    .search-and-add-song-group {
+        flex-direction: column;
+        align-items: center;
+    }
+    .song-search-group {
+        align-self: stretch;
+    }
+    .add-song-button-group {
+        flex: 1 1 auto;
+        margin: 10px 0;
+    }
+}
+.checkbox {
+    padding-left: 20px; }
+.checkbox label {
+    display: inline-block;
+    position: relative;
+    padding-left: 5px; }
+.checkbox label::before {
+    content: "";
+    display: inline-block;
+    position: absolute;
+    width: 17px;
+    height: 17px;
+    left: 0;
+    margin-left: -20px;
+    border: 1px solid #cccccc;
+    border-radius: 3px;
+    background-color: #fff;
+    -webkit-transition: border 0.15s ease-in-out, color 0.15s ease-in-out;
+    -o-transition: border 0.15s ease-in-out, color 0.15s ease-in-out;
+    transition: border 0.15s ease-in-out, color 0.15s ease-in-out; }
+.checkbox label::after {
+    display: inline-block;
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    left: 0;
+    top: 0;
+    margin-left: -20px;
+    padding-left: 3px;
+    padding-top: 1px;
+    font-size: 11px;
+    color: #555555; }
+.checkbox input[type="checkbox"] {
+    opacity: 0; }
+.checkbox input[type="checkbox"]:focus + label::before {
+    outline: thin dotted;
+    outline: 5px auto -webkit-focus-ring-color;
+    outline-offset: -2px; }
+.checkbox input[type="checkbox"]:checked + label::after {
+    font-family: 'FontAwesome';
+    content: "\f00c"; }
+.checkbox input[type="checkbox"]:disabled + label {
+    opacity: 0.65; }
+.checkbox input[type="checkbox"]:disabled + label::before {
+    background-color: #eeeeee;
+    cursor: not-allowed; }
+.checkbox.checkbox-inline {
+    margin-top: 0; }
+
+#custom-search-input {
+    margin:0;
+    margin-top: 10px;
+    padding: 0;
 }

@@ -56,74 +56,83 @@ $delete_btn;
 if($updating){
   $delete_btn = 
     "<form action=\"delete.php\" method=\"post\">
-      <div class=\"container\">
-        <button class=\"btn btn-danger\" name=\"deleteId\" value=\"$id\">VYMAZAT TENTO ZÁZNAM</button>
+      <div class=\"row\">
+        <div class=\"col-sm-1 col-centered\">
+            <button class=\"btn btn-danger\" name=\"deleteId\" value=\"$id\">VYMAZAT TENTO ZÁZNAM</button>
+        </div>
       </div>
     </form>";
 }
 ?>
 
 <div class="container">
-<div class="well">
-<form class="form-horizontal" _lpchecked="1" action="upload.php" method="post" enctype="multipart/form-data">
-<input type="hidden" name="updating" value="<?php echo $updating;?>">
-<input type="hidden" name="id" value="<?php echo $id;?>">
-  <fieldset>
-    <legend>Zadejte informace o písni</legend>
-    <div class="container">
-    <div class="form-group">
-      <div class="form-group">       <div class="col-lg-10">
-        <label class="control-label">Název:</label>
-        <input type="text" class="form-control" name="inputTitle" placeholder="<?php echo $title;?>" style="cursor: auto;">
-      </div>
-      </div>
-      <div class="form-group">       <div class="col-lg-10">
-        <label class="control-label">Interpret:</label>
-        <input type="text" class="form-control" name="inputArtist" placeholder="<?php echo $artist;?>" style="cursor: auto;">
-      </div>
-      </div>
-      <div class="form-group">       <div class="col-lg-10">
-        <label class="control-label">Datum přidání:</label>
-        <input type="text" class="form-control" name="inputDate" placeholder="<?php echo $added_on;?>" style="cursor: auto;">
-      </div>
-      </div>
-    </div>
+    <form class="form-horizontal" _lpchecked="1" action="upload.php" method="post" enctype="multipart/form-data">
+    <input type="hidden" name="updating" value="<?php echo $updating;?>">
+    <input type="hidden" name="id" value="<?php echo $id;?>">
+      <fieldset>
+        <div class="container">
+            <div class="well" style="padding: 20px">
+                <legend>Zadejte informace o písni</legend>
+                <div class="form-group">
+                  <div class="form-group">
+                      <div class="col-sm-11 col-centered">
+                        <label class="control-label">Název:</label>
+                        <input type="text" class="form-control" name="inputTitle" placeholder="<?php echo $title;?>" style="cursor: auto;">
+                      </div>
+                  </div>
 
-    <div class="form-group">
-      <div class="form-group">  
-        <label class="control-label">Vyberte jazyk:</label>
-        <select class="form-control" name="inputLanguage">
-          <?php echo generateSelect($languagesArray, $language);?>
-        </select>
-      </div>
-    </div>
+                  <div class="form-group">
+                      <div class="col-sm-11 col-centered">
+                        <label class="control-label">Interpret:</label>
+                        <input type="text" class="form-control" name="inputArtist" placeholder="<?php echo $artist;?>" style="cursor: auto;">
+                      </div>
+                  </div>
 
-    <div class="form-group" style="padding:25;">
-        <label class="control-label">Vyberte originální sken:</label>
-        <input type="file" name="best" id="best">
-        <br>
-        <label class="control-label">Vyberte zkompresovaný sken:</label>
-        <input type="file" name="compressed" id="compressed">
-        <br>
-        <label class="control-label">Vyberte vygenerovaný soubor PDF:</label>
-        <input type="file" name="gen" id="gen">
-        <br>
-        <div class="col-lg-8">
-        <label class="control-label">Vložte text ve formátu ChordPro:</label>
-        <textarea class="form-control" rows="3" name="chordpro"><?php echo htmlspecialchars($chordpro_text); ?></textarea>
-      </div>
-    </div>
-    
-    <div class="form-group">
-      <div class="col-lg-10 col-lg-offset-2">
-         <button type="submit" class="btn btn-primary">Nahrát</button>
-         <button type="reset" class="btn btn-default">Zrušit</button>
-      </div>
-    </div>
-    </div>
-  </fieldset>
-</form>
-</div>
+                  <div class="form-group">
+                      <div class="col-sm-11 col-centered">
+                        <label class="control-label">Datum přidání:</label>
+                        <input type="text" class="form-control" name="inputDate" placeholder="<?php echo $added_on;?>" style="cursor: auto;">
+                      </div>
+                  </div>
+
+                <div class="form-group">
+                  <div class="col-sm-11  col-centered">
+                    <label class="control-label">Vyberte jazyk:</label>
+                    <select class="form-control" name="inputLanguage">
+                      <?php echo generateSelect($languagesArray, $language);?>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-sm-10 col-centered">
+                    <div class="form-group">
+                        <label class="control-label">Vyberte originální sken:</label>
+                        <input type="file" name="best" id="best">
+                        <br>
+                        <label class="control-label">Vyberte zkompresovaný sken:</label>
+                        <input type="file" name="compressed" id="compressed">
+                        <br>
+                        <label class="control-label">Vyberte vygenerovaný soubor PDF:</label>
+                        <input type="file" name="gen" id="gen">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-sm-11 col-centered">
+                        <label class="control-label">Vložte text ve formátu ChordPro:</label>
+                        <textarea class="form-control" rows="3" name="chordpro"><?php echo htmlspecialchars($chordpro_text); ?></textarea>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                  <div class="col-sm-11 col-centered">
+                     <button type="submit" class="btn btn-primary">Nahrát</button>
+                     <button type="reset" class="btn btn-default">Zrušit</button>
+                  </div>
+                </div>
+            </div>
+        </div>
+      </fieldset>
+    </form>
 </div>
 
 <?php echo $delete_btn;?>

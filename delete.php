@@ -1,6 +1,6 @@
 <?php
 include('lib/password_protect.php');
-$page_title="Submit";
+$page_title="Smazat píseň";
 $page = "db";
 require_once 'template.php';
 require_once 'makeTextNiceAgain.php';

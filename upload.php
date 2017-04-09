@@ -1,6 +1,6 @@
 <?php
 include('lib/password_protect.php');
-$page_title='Upload';
+$page_title='Nahrát píseň';
 $page = 'db';
 require_once 'template.php';
 require_once 'makeTextNiceAgain.php';
@@ -58,7 +58,7 @@ if($updating == true){
         $row = $result->fetchArray(SQLITE3_ASSOC);
         $old_song = new Song($row['_id'], $row['Title'], $row['Artist'], $row['hasGen'], $row['AddedOn'], $row['Lang']);
      } else {
-         die ("Couldnt connect to the db!");
+         die ("Chyba při připojování se k databázi!");
      }
     $basename .= (makeTextNiceAgain($old_song->getArtist()) . "_" . makeTextNiceAgain($old_song->getTitle()));
 
@@ -97,7 +97,7 @@ $target_file_chordpro = $basename . "-chordpro.txt";
 //Only allow for the correct format
 if (strlen($addedOn) != 4) {
     $addedOn = date("y") . date("m");
-    $GLOBALS['message'] .= "Incorrect date, set to " . $addedOn . " <br>";
+    $GLOBALS['message'] .= "Nesprávný formát data, nastaveno na " . $addedOn . " <br>";
 }
 
 //When not updating, we need to check that everything is set
@@ -106,7 +106,7 @@ if(inputOK($artist, $title)){
         if(checkTitle($db, $title)){
             uploadFiles($target_file_original, $target_file_compressed, $target_file_gen, $target_file_chordpro);
             writeIntoDB($db);
-            $GLOBALS['message'] .= "The file " . basename($_FILES["best"]["name"]) . " has been uploaded. <br>";
+            $GLOBALS['message'] .= "Soubor " . basename($_FILES["best"]["name"]) . " byl nahrán. <br>";
         }
     }
 }
@@ -120,8 +120,7 @@ function inputOK($artist, $title)
 
     //Check if comp and orig are set
     if (($_FILES['best'] == null || $_FILES['compressed'] == null) && $GLOBALS['updating'] == false) {
-        $GLOBALS['message'] .= "Sorry, you need to upload at least \"Best\" and \"Compressed\" files... </br>";
-        echo "you fucking need to provide files, biatch";
+        $GLOBALS['message'] .= "Je nutné nahrát alespoň skeny (originální a kompresovaný) k nové písni!</br>";
         return false;
     }
     return true;
@@ -138,41 +137,41 @@ function checkTitle($db, $title){
         $row = $result->fetchArray(SQLITE3_ASSOC);
         //When there is a result that's different to what we had
         if($row != false && $row['_id'] != $_POST['id']){
-            $GLOBALS['message'] .= "Sorry, title already exists. </br>";
+            $GLOBALS['message'] .= "Tento název bohužel již existuje. Zkuste zvolit jiný. :) <br>";
             return false;
         }
         return true;
     } else {
-        echo "db error when checking the title";
+        echo "Error datábaze při kontrole jedinečnosti názvu.";
     }
 }
 
 function filesOK(){
         // Check file sizes
         if ($_FILES["best"]["size"] > 50000000) {
-            $GLOBALS['message'] .= "Sorry, maximum \"Best\" size is 50MB. </br>";
+            $GLOBALS['message'] .= "Originální sken přesahuje maximální povovlenou velikost (50MB). </br>";
             return false;
         }
         if ($_FILES["compressed"]["size"] > 5000000) {
-            $GLOBALS['message'] .= "Sorry, maximum \"Compressed\" size is 5MB. </br>";
+            $GLOBALS['message'] .= "Kompresovaný sken přesahuje maximální povovlenou velikost (5MB). </br>";
             return false;
         }
         if ($_FILES["gen"]["size"] > 5000000) {
-            $GLOBALS['message'] .= "Sorry, maximum \"Gen\" size is 5MB. </br>";
+            $GLOBALS['message'] .= "Generovaný soubor přesahuje maximální povovlenou velikost (5MB). </br>";
             return false;
         }
 
         // Allow only PDFs, check only if it was submitted
         if ((pathinfo(basename($_FILES["best"]["name"]), PATHINFO_EXTENSION) != "pdf") && $GLOBALS['uploading_sken'] == true) {
-            $GLOBALS['message'] .= "Sorry, \"Best\" is not a PDF file. </br>";
+            $GLOBALS['message'] .= "Originální sken není PDF. Zkuste to znovu a lépe. :) </br>";
             return false;
         }
         if ((pathinfo(basename($_FILES["compressed"]["name"]), PATHINFO_EXTENSION) != "pdf") && $GLOBALS['uploading_comp'] == true) {
-            $GLOBALS['message'] .= "Sorry, \"Compressed\" is not a PDF file. </br>";
+            $GLOBALS['message'] .= "Kompresovaný sken není PDF. Zkuste to znovu a lépe. :) </br>";
             return false;
         }
         if ((pathinfo(basename($_FILES["gen"]["name"]), PATHINFO_EXTENSION) != "pdf") && $GLOBALS['uploading_gen'] == true) {
-            $GLOBALS['message'] .= "Sorry, \"Gen\" is not a PDF file. </br>";
+            $GLOBALS['message'] .= "Generovaný soubor není PDF. Zkuste to znovu a lépe. :) </br>";
             return false;
         }
         return true;
@@ -205,7 +204,7 @@ function uploadFiles($target_file_original, $target_file_compressed, $target_fil
         }
 
         if(!move_uploaded_file($_FILES['best']['tmp_name'], $target_file_original)){
-            $GLOBALS['message'] .= "Sorry, there was an error uploading your sken file. <br>";
+            $GLOBALS['message'] .= "Jejda! Došlo k problému při nahrávání originálního skenu. :(<br>";
             return;
         }
     }
@@ -215,7 +214,7 @@ function uploadFiles($target_file_original, $target_file_compressed, $target_fil
         }
 
         if(!move_uploaded_file($_FILES['compressed']['tmp_name'], $target_file_compressed)){
-            $GLOBALS['message'] .= "Sorry, there was an error uploading your sken file. <br>";
+            $GLOBALS['message'] .= "Jejda! Došlo k problému při nahrávání kompresovaného skenu. :(<br>";
             return;
         }
     }
@@ -225,7 +224,7 @@ function uploadFiles($target_file_original, $target_file_compressed, $target_fil
         }
 
         if(!move_uploaded_file($_FILES['gen']['tmp_name'], $target_file_gen)){
-            $GLOBALS['message'] .= "Sorry, there was an error uploading your gen file. <br>";
+            $GLOBALS['message'] .= "Jejda! Došlo k problému při nahrávání generovaného PDF. :(<br>";
             return;
         }
     }
@@ -235,7 +234,7 @@ function uploadFiles($target_file_original, $target_file_compressed, $target_fil
             rename($target_file_chordpro, microtime() . "-" . $target_file_chordpro);
         }
 
-        $chordpro_file = fopen($target_file_chordpro, "w") or die ("Unable to open file!");
+        $chordpro_file = fopen($target_file_chordpro, "w") or die ("Nepodařilo se otevřít databázi!");
         fwrite ($chordpro_file, $_POST['chordpro']);
         fclose ($chordpro_file);
     }
