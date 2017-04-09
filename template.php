@@ -57,6 +57,5 @@ $ini = parse_ini_file('config.ini');
           </li>
         </ul>
       </div>
-
     </div>
   </nav>
