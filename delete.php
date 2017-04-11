@@ -18,8 +18,11 @@ $result=$stmt->execute();
 if ($result != null) {
     $row = $result->fetchArray(SQLITE3_ASSOC);
     $old_song = $row['_id'] . "-" . $row['Title']. "-"  . $row['Artist']. "-"  . $row['hasGen']. "-" . $row['AddedOn']. "-"  . $row['Lang'];
-    file_put_contents('delete_log.txt', $old_song . "\n", FILE_APPEND);
+    //Write data into the log
+    file_put_contents('_delete_log.txt', $old_song . "\n", FILE_APPEND);
 
+    //Backup files by adding the "deleted" keyword at the end
+    //Also prefixing them with an underscore, so that admin can see recently deleted files easily
     $basename = makeTextNiceAgain($row['Artist']) . "_" . makeTextNiceAgain($row['Title']);
     rename($ini['files_location'] . $basename . "-sken.pdf", $ini['files_location'] ."_"  . $basename . "-sken_deleted.pdf");
     rename($ini['files_location'] . $basename . "-comp.pdf", $ini['files_location'] ."_"  . $basename . "-comp_deleted.pdf");

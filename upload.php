@@ -106,7 +106,7 @@ if(inputOK($artist, $title)){
         if(checkTitle($db, $title)){
             uploadFiles($target_file_original, $target_file_compressed, $target_file_gen, $target_file_chordpro);
             writeIntoDB($db);
-            $GLOBALS['message'] .= "Soubor " . basename($_FILES["best"]["name"]) . " byl nahrán. <br>";
+            $GLOBALS['message'] .= "Píseň byla úspěšně zapsána do databáze. :) <br>";
         }
     }
 }
@@ -114,7 +114,7 @@ if(inputOK($artist, $title)){
 function inputOK($artist, $title)
 {
     if (empty($artist) || empty($title)) {
-        $GLOBALS['message'] .= "You need to provide an artist and a title! </br>";
+        $GLOBALS['message'] .= "Musíte zadat alespoň název a interpreta! </br>";
         return false;
     }
 
@@ -177,7 +177,6 @@ function filesOK(){
         return true;
     }
 
-//TODO: backup old files
 function uploadFiles($target_file_original, $target_file_compressed, $target_file_gen, $target_file_chordpro)
 {
     
@@ -199,8 +198,9 @@ function uploadFiles($target_file_original, $target_file_compressed, $target_fil
 
     //Try to upload files only if they are provided, backup old files
     if($GLOBALS['uploading_sken'] == true){
+        //Backup made by appending current microtime to the filename
         if(file_exists($target_file_original)){
-            rename($target_file_original, microtime() . "-" . $target_file_original);
+            rename($target_file_original, $target_file_original . "-". microtime() . ".pdf");
         }
 
         if(!move_uploaded_file($_FILES['best']['tmp_name'], $target_file_original)){
@@ -210,7 +210,7 @@ function uploadFiles($target_file_original, $target_file_compressed, $target_fil
     }
     if($GLOBALS['uploading_comp'] == true){
         if(file_exists($target_file_compressed)){
-            rename($target_file_compressed, microtime(). "-" . $target_file_compressed );
+            rename($target_file_compressed, $target_file_compressed . "-". microtime() . ".pdf");
         }
 
         if(!move_uploaded_file($_FILES['compressed']['tmp_name'], $target_file_compressed)){
@@ -220,7 +220,7 @@ function uploadFiles($target_file_original, $target_file_compressed, $target_fil
     }
     if ($GLOBALS['uploading_gen'] == true) {
         if(file_exists($target_file_gen)){
-            rename($target_file_gen, microtime(). "-" .$target_file_gen);
+            rename($target_file_gen, $target_file_gen . "-". microtime() . ".pdf");
         }
 
         if(!move_uploaded_file($_FILES['gen']['tmp_name'], $target_file_gen)){
@@ -231,7 +231,7 @@ function uploadFiles($target_file_original, $target_file_compressed, $target_fil
 
     if ($GLOBALS['updating_chordpro'] == true){
         if(file_exists($target_file_chordpro)){
-            rename($target_file_chordpro, microtime() . "-" . $target_file_chordpro);
+            rename($target_file_chordpro, $target_file_chordpro. "-". microtime() . ".pdf");
         }
 
         $chordpro_file = fopen($target_file_chordpro, "w") or die ("Nepodařilo se otevřít databázi!");
@@ -259,9 +259,9 @@ function writeIntoDB($db)
                 $sql .= " AddedOn=:addedon,";
             }
             if($GLOBALS['updating_chordpro'] == true){
-                $sql .= " hasChordPro = 1";
+                $sql .= " hasChordPro=1,";
             }
-            //Remove last comma
+            //Remove last comma (there will always be one)
             $sql = substr($sql, 0, -1);
 
             //Add condition

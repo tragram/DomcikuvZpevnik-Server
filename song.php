@@ -24,7 +24,7 @@
         }
 
         /**
-         * @return mixed
+         * @return int ID of this song
          */
         public function getId()
         {
@@ -32,7 +32,7 @@
         }
 
         /**
-         * @return String
+         * @return String Title of this song
          */
         public function getTitle()
         {
@@ -40,7 +40,7 @@
         }
 
         /**
-         * @return String
+         * @return String Artist of this song
          */
         public function getArtist()
         {
@@ -51,7 +51,7 @@
             return $this->has_pdf_gen;
         }
         /**
-         * @return int
+         * @return int Date this song was added on
          */
         public function getDateAdded()
         {
@@ -59,13 +59,14 @@
         }
 
         /**
-         * @return String
+         * @return String Language this song is in
          */
         public function getLanguage()
         {
             return $this->language;
         }
 
+        //Returns the czech translation of the language
         public function getLanguageCzech(){
             switch($this->language){
                 case "CZECH":
@@ -88,6 +89,7 @@
             }
         }
 
+        //These create the expecred URLs of the files
         public function getSkenURL()
         {
             return $this->base_filename . "-sken.pdf";
@@ -116,6 +118,7 @@
             return $this->base_filename . "-chordpro.txt";
         }
 
+        //Buttons to be used in the table
         public function getChordProButton(){
             $chpFile = $this->getChordProURL();
             if (file_exists($chpFile)) {

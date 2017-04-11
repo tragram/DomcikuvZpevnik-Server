@@ -5,14 +5,12 @@
     use \Simple\json;
     $json = new json();
   
-    // Ojects to send
+    //Take the config.ini info and write them into an object for the Android client to use
     $object = new stdClass();
     $object->files_location  = $ini['server_root'] . $ini['files_location'];
     $object->database_location = $ini['server_root'] . $ini['database_location'];
     
-    // Forge the JSON
+    // Forge and send the JSON
     $json->data = $object;
-    
-    // Send the JSON
     $json->send();
 ?>

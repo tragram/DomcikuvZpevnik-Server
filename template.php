@@ -44,17 +44,20 @@ $ini = parse_ini_file('config.ini');
 
       <div class="collapse navbar-collapse" id="my-navbar">
         <ul class="nav navbar-nav">
+        <!-- Use $page=home for 'Home', db for 'Databáze' and docs for 'Dokumentace'-->
           <li <?php echo ($page == 'home') ? 'class="active"' : '';?>><a href="index.php">Home<span class="sr-only"></span></a></li>
           <li <?php echo ($page == 'db') ? 'class="active"' : '';?>><a href="database.php">Databáze</a></li>
           <li class="dropdown" <?php echo ($page == 'docs') ? 'class="active"' : '';?>>
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dokumentace<span class="caret"></span></a>
             <ul class="dropdown-menu" role="menu">
-              <li><a href="doc/uzivatelska_dokumentace.pdf" target="_blank">Uživatelská dokumentace</a></li>
+              <li><a href="doc/uzivatelska_dokumentace.md.pdf">Uživatelská dokumentace</a></li>
               <li class="divider"></li>
               <li><a href="https://github.com/tragram/DomcikuvZpevnik-Server" target="_blank">Zdrojový kód - server</a></li>
+              <li><a href="doc/server_doc.md.pdf" target="_blank">Vývojářská dokumentace serveru - readme</a></li>
               <li class="divider"></li>
               <li><a href="https://github.com/tragram/DomcikuvZpevnik" target="_blank">Zdrojový kód - aplikace</a></li>
-              <li><a href="doc/JavaDoc/" target="_blank">Vývojářská dokumentace - aplikace</a></li>
+              <li><a href="doc/app_doc.md.pdf" target="_blank">Vývojářská dokumentace aplikace - readme</a></li>
+              <li><a href="doc/JavaDoc/" target="_blank">Vývojářská dokumentace - aplikace (JavaDoc)</a></li>
             </ul>
           </li>
         </ul>
